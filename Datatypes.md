@@ -17,3 +17,5 @@ Nullable. A File pointer for example, can either return a `Just (file)` if file 
 data Either a b = Left a
                 | Right b
 ```
+Usually either an error or a return
+- refer `Either.hs`
