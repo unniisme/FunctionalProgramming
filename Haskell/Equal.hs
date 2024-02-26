@@ -5,6 +5,8 @@
 -- We make a class so that we can implement Eq for different types a
 class Equality a where
     eq :: a -> a -> Bool
+    neq :: a -> a -> Bool
+    neq a b = not (eq a b)
 
 
 
@@ -37,7 +39,7 @@ main = do
     print (eq "asd" "dsa")
     print (eq "asd" "asd")
     print (eq "a" "aaaaaaaa")
-
+    print (eq ["a"] ["a"])
 
 ------Note------
 -- The implemented type class for Equality in Haskell is Eq
@@ -51,4 +53,4 @@ data Tree a = NullNode | Node (Tree a) a (Tree a)
 instance Eq a => Eq (Tree a) where
     (==) NullNode NullNode = True
     (==) (Node l1 v1 r1) (Node l2 v2 r2) = l1 == l2 && v1 == v2 && r1 == r2 
-    (==) _ _ = True
+    (==) _ _ = False

@@ -21,3 +21,4 @@ Here, `y` is guaranteed to be an element of `xs` (regardless of implementation o
 
 ## Examples:
 - `Equal.hs` : A parametrised, general equality function
+- `Ord.hs`  : Class for order functions (<=, >= etc)
