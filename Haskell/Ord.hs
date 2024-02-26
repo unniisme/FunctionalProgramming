@@ -45,3 +45,13 @@ sort (x:xs) =
     let smallerSorted = sort [a | a <- xs, leq a x]
         biggerSorted = sort [a | a <- xs, not (leq a x)]
     in  smallerSorted ++ [x] ++ biggerSorted
+
+main = do
+    print (leq (1::Int) 2)
+    print (leq True False)
+
+    let lst = [2::Int,5,1,2,3]
+    putStrLn "Input list : "
+    print lst
+    putStrLn "Sorted list : "
+    print (sort lst)
