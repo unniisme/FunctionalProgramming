@@ -22,3 +22,24 @@ Here, `y` is guaranteed to be an element of `xs` (regardless of implementation o
 ## Examples:
 - `Equal.hs` : A parametrised, general equality function
 - `Ord.hs`  : Class for order functions (<=, >= etc)
+- `Deriving.hs` : deriving keyword
+
+## Problem
+Type classes have the problem of **coherence** of instance definition.  
+ie. Multiple code blocks may have defined an instance for the same Type Class, possibly in multiple modules, and possibly conflicting.  
+- To fix, compiler has to decide on using only one of these instances globally, bad idea.
+
+```Haskell
+-- Module 1
+instance Foo where
+    bar (Foo a) = "something"
+
+-- Module 2
+instance Foo where
+    bar (Foo a) = "something else"
+
+
+-- Main code
+bar (Foo a)
+    -- What will bar be resolved to here?
+```

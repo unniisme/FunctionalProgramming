@@ -3,10 +3,13 @@
 -- Haskell class Ord
 --
 -- class Eq a => Ord a where
---  (<=) :: a -> a -> Bool
---  (>=) :: a -> a -> Bool
---  (<) :: a -> a -> Bool
---  (>) :: a -> a -> Bool
+--      compare :: a -> a -> Ordering
+--      (<) :: a -> a -> Bool
+--      (<=) :: a -> a -> Bool
+--      (>) :: a -> a -> Bool
+--      (>=) :: a -> a -> Bool
+--      max :: a -> a -> a
+--      min :: a -> a -> a
 
 class Eq a => Order a where
     leq :: a -> a -> Bool

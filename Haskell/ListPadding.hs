@@ -4,7 +4,7 @@ type Table = [[String]]
 -- Helper functions
 duplicate string n = concat $ replicate n string -- repeate a string n times
 zeroes = 0 : zeroes -- repeat 0
-printTable [] = return()
+printTable [] = return ()
 printTable (row:tab) = do
    print row
    printTable tab
@@ -46,12 +46,17 @@ method1 table = do
 
 -- Problem : Define the same method such that only 1 iteration over the table will have to be done if evaluated lazily
 tableHandler :: [Int] -> Table -> (Table, [Int])
-tableHandler padding = foldr (rowFoldHandler padding) ([], zeroes)  
+tableHandler padding = foldr (rowFoldHandler padding) ([], zeroes)
 rowFoldHandler :: [Int] -> Row -> (Table, [Int]) -> (Table, [Int])
 rowFoldHandler initialPadding r (table, padding) = (padRows initialPadding r : table, combf r padding)
    -- Not entirely correct right now since multiple passes are still made
    -- But lets assume it is for now
 
+
+
+padOnePass :: Table -> Table
+padOnePass table = paddedTable
+         where (paddedTable, padding) = tableHandler padding table
 
 method2 :: Table -> IO()
 method2 table = do
@@ -60,8 +65,7 @@ method2 table = do
       -- Megik!!
       -- If tableHandler is implemented correctly, this application will ensure that 
       -- lazy evaluation will only make 1 pass
-   let (paddedTable, padding) = tableHandler padding table
-   printTable paddedTable
+   printTable (padOnePass table)
 
 
 
@@ -71,3 +75,8 @@ main = do
    printTable table
    method1 table
    method2 table
+
+
+
+padList lst = map (const x) lst
+      where x = minimum lst

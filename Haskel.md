@@ -100,7 +100,7 @@ is shorthand for
 
 The cons operator
 ```
-(:) :: (a ,[a]) -> [a]
+(:) :: (a -> [a]) -> [a]
 ```
 
 ### Other functions

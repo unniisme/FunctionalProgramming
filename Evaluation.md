@@ -16,3 +16,8 @@ The function is evaluated as is, arguments are evaluated (recursively) only when
     - refer `Haskell/FoldProblem.hs`
 
 Thunk : {a, ()->a}, a is kept as invalid. If a is forced, it is evaluated and stored.
+
+
+
+Refer `Haskell/Lazy.hs`
+- Fibonacci sequence as an infinte list
