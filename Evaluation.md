@@ -9,15 +9,15 @@ The function is evaluated as is, arguments are evaluated (recursively) only when
 
 ### Uses
 - Can sometimes cut down number of traversals over datastructures required
-    - refer `Haskell/ListPadding.hs`
+    - refer [ListPadding.hs](Haskell/ListPadding.hs)
 
 ### Problems
 - Folds have to be reiterated, with cerain parts (called thunk) kept in memory to evaluate later
-    - refer `Haskell/FoldProblem.hs`
+    - refer [FoldProblem.hs](Haskell/FoldProblem.hs)
 
 Thunk : {a, ()->a}, a is kept as invalid. If a is forced, it is evaluated and stored.
 
 
 
-Refer `Haskell/Lazy.hs`
+Refer [Lazy.hs](Haskell/Lazy.hs)
 - Fibonacci sequence as an infinte list

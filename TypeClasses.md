@@ -20,9 +20,37 @@ Here, `y` is guaranteed to be an element of `xs` (regardless of implementation o
 - ppk is a purist. All terminology has to be as per it's first definition.
 
 ## Examples:
-- `Equal.hs` : A parametrised, general equality function
-- `Ord.hs`  : Class for order functions (<=, >= etc)
-- `Deriving.hs` : deriving keyword
+#### Eq
+- A parametrised, general equality function
+```Haskell
+class Eq a where
+    (==) :: a -> a -> Bool
+```
+- Refer [Equal.hs](Haskell/Equal.hs)
+
+#### Ord
+- Class for order functions (<=, >= etc)
+```Haskell
+class Eq a => Ord a where
+    compare :: a -> a -> Ordering
+    (<) :: a -> a -> Bool
+    (<=) :: a -> a -> Bool
+    (>) :: a -> a -> Bool
+    (>=) :: a -> a -> Bool
+    max :: a -> a -> a
+    min :: a -> a -> a
+```
+- Refer [Ord.hs](Haskell/Ord.hs)
+
+#### Deriving Keyword
+- [Deriving.hs](Haskell/Deriving.hs) : deriving keyword
+
+#### Functors
+- Refer `Functors.md`
+
+#### Applicative
+- Refer `Applicative.md`
+
 
 ## Problem
 Type classes have the problem of **coherence** of instance definition.  
