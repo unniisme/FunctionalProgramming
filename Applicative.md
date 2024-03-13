@@ -1,11 +1,13 @@
 # Applicative
 
+Extending functor interface for multi-argument functions
 
 Defined as
 ```Haskell
 class Functor t => Applicative t where
     pure :: a -> t a
     (<*>)  :: t (a -> b) -> t a -> t b
+        -- Called 'apply'
 
 
 -- Identities:
