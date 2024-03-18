@@ -33,9 +33,11 @@ stmt = do action ; stmt         -- action >> stmt
     | action                    -- action
 ```
 
+Apply written using do-notation
 ```Haskell
 (<*>) tf ta = do f <- tf
                 x <- ta
                 return (f x)
 ```
 Basically converts this section of code into an imperative language
+- Refer [Inputs.hs](Haskell/Inputs.hs)

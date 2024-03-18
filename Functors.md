@@ -4,6 +4,10 @@
 ```Haskell
 class Functor f where
   fmap :: (a -> b) -> f a -> f b
+
+-- <$> is shorthand for fmap
+-- f <$> tx = fmap f tx
+-- (<$>) :: (a -> b) -> t a -> t b
 ```
 - They follow these identities
 ```Haskell
