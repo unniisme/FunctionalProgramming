@@ -61,7 +61,7 @@ main = do
     putStrLn conc2
 
 
-    putStrLn "\n Input Concatnation (with bind)"
+    putStrLn "\nInput Concatnation (with bind)"
     concBind1 <- concatInputsBind
     putStrLn concBind1
     concBind2 <- inputConcatFuncBind

@@ -41,3 +41,17 @@ Apply written using do-notation
 ```
 Basically converts this section of code into an imperative language
 - Refer [Inputs.hs](Haskell/Inputs.hs)
+- Also refer [MaybeMonad.hs](Haskell/MaybeMonad.hs)
+
+
+### Join operation
+```Haskell
+join :: Monad m => m (m a) -> m a
+join mma = mma >>= \ma -> ma
+```
+Not implemented in `class Monad` but is nonetheless enough to define a monad
+
+```Haskell
+bind :: Monad m => m a -> (a -> m b) -> m b
+bind ma f = join (fmap f ma)
+```
