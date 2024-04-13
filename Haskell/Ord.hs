@@ -23,14 +23,17 @@ instance Order Int where
 
 -- Lexicographic ordering
 instance (Order a, Order b) => Order (a,b) where
+    leq :: (Order a, Order b) => (a, b) -> (a, b) -> Bool
     leq (a1, b1) (a2, b2)   | a1 == a2  = leq b1 b2
                             | leq a1 a2 = True
                             | otherwise = False
 
 instance (Order a) => Order [a] where
+    leq :: Order a => [a] -> [a] -> Bool
     leq (x:xs) (y:ys)   | x == y  = leq xs ys
                         | leq x y = True
                         | otherwise = False
+    leq [] [] = True
     leq _ _ = False
 
 

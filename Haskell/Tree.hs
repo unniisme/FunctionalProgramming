@@ -96,3 +96,34 @@ main = do
     putStrLn ""
     putStr (printTree (findMinTree t) 0 "  ")
     putStr (printTree (findMinTreeOnePass t) 0 "  ")
+
+
+
+
+
+
+
+-----------------More stuff-----------------------------
+
+instance Functor Tree where
+  fmap :: (a -> b) -> Tree a -> Tree b
+  fmap f Empty = Empty
+  fmap f (Node ta a tb) = Node (fmap f ta) (f a) (fmap f tb)
+
+instance Applicative Tree where
+    -- Singleton
+    pure :: a -> Tree a
+    pure x = Node Empty x Empty
+
+    (<*>) :: Tree (a -> b) -> Tree a -> Tree b
+    Empty <*> _ = Empty
+    _ <*> Empty = Empty
+    Node tfa f tfb <*> Node ta v tb = Node (tfa <*> ta) (f v) (tfb <*> tb)
+
+instance Monad Tree where
+  (>>=) :: Tree a -> (a -> Tree b) -> Tree b
+  Empty >>= _ = Empty
+  Node ta v tb >>= f = f v
+        -- Not a very useful Monad
+     
+    

@@ -55,3 +55,19 @@ Not implemented in `class Monad` but is nonetheless enough to define a monad
 bind :: Monad m => m a -> (a -> m b) -> m b
 bind ma f = join (fmap f ma)
 ```
+
+
+# Stateful Computation
+Computation that involves keeping track of a state.  
+On each operation, output is dependant on the previous state. This is in line with the functionality of monads.
+- Refer [States.hs](Haskell/States.hs) 
+
+
+# Monad Transformations
+Using a stateful monad, it is possible to stack multiple monads.  
+
+```Haskell
+data StateTransform s m a
+```
+Where `s` is state, `m` is inner monad, `a` is emitted value
+- Refer [StateTransform.hs](Haskell/StateTransform.hs)
