@@ -1,7 +1,7 @@
 module Main where
 
 import Parser
-import Syntax (parser)
+import Syntax (parser, Expr)
 import Data.Char (isAlpha, isDigit)
 
 main = do

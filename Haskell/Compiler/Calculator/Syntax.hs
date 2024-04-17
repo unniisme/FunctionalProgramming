@@ -1,34 +1,25 @@
-module Syntax where
+module Calculator.Syntax (parser) where
 
-import Parser ( (<|>), charSatisfy, many, many1, Parser, eofParser)
-import Data.Char (isAlpha, isDigit)
+import Parser
+import Calculator.Types
 
-data Expr = Number Double
-        | Sub Expr Expr
-        | Add Expr Expr
-        | Mul Expr Expr
-        | Div Expr Expr
-        | Neg Expr
-        deriving Show
 
-alphaParser :: Parser Char
-alphaParser = charSatisfy isAlpha
-digitParser :: Parser Char
-digitParser = charSatisfy isDigit
-spaceParser :: Parser Char
-spaceParser = charSatisfy (==' ')
-indentParser :: Parser Char
-indentParser = charSatisfy (=='\t')
+doubleParser :: Parser Double
+doubleParser = 
+    do
+        integerPart <- many1 digitParser
+        _ <- oneChar '.'
+        fractionalPart <- many1 digitParser
+        let numberStr = integerPart ++ "." ++ fractionalPart
+        return (read numberStr)
+    <|>
+    do
+        integer <- many1 digitParser
+        return (read integer) 
 
-whiteSpaceParser :: Parser String
-whiteSpaceParser = many (spaceParser <|> indentParser)
-
--- Parse one or more digits and convert them into an integer
-numberParser :: Parser Double
-numberParser = read <$> many1 digitParser
 
 numParser :: Parser Expr
-numParser = Number <$> numberParser
+numParser = Con <$> doubleParser
 
 
 opParsers :: [Parser (Expr->Expr->Expr)]
