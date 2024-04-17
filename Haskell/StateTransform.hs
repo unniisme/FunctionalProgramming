@@ -55,3 +55,8 @@ put s = StateT fn
 lift :: (Functor m) => m a -> StateT s m a
 lift ma = StateT fn
     where fn s0 = (\x -> (x,s0)) <$> ma
+
+
+
+
+---- Example

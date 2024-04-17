@@ -11,3 +11,4 @@ Notes on Functional Programming in Haskell
 5. [Functors.md](Functors.md)
 6. [Applicative.md](Applicative.md)
 7. [Monad.md](Monad.md)
+8. [ModuleSystem.md](ModuleSystem.md)
