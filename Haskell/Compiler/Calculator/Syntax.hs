@@ -3,9 +3,11 @@ module Calculator.Syntax (parser) where
 import Parser
 import Calculator.Types
 
+----- Expressions ---------------
+wordParser = many1 alphaParser
 
 doubleParser :: Parser Double
-doubleParser = 
+doubleParser =
     do
         integerPart <- many1 digitParser
         _ <- oneChar '.'
@@ -15,12 +17,14 @@ doubleParser =
     <|>
     do
         integer <- many1 digitParser
-        return (read integer) 
+        return (read integer)
 
 
 numParser :: Parser Expr
 numParser = Con <$> doubleParser
 
+varParser :: Parser Expr
+varParser = Var <$> wordParser
 
 opParsers :: [Parser (Expr->Expr->Expr)]
 opParsers = [
@@ -36,7 +40,7 @@ exprParser = chainParsers factorParser opParsers
 
 -- Parser for factors (handles numbers and parenthesized expressions)
 factorParser :: Parser Expr
-factorParser = parenParser <|> negExpParser <|> numParser
+factorParser = parenParser <|> negExpParser <|> numParser <|> varParser
 
 opToParser :: Char -> (Expr -> Expr -> Expr) -> Parser (Expr -> Expr -> Expr)
 opToParser c op = charSatisfy (==c) >> return op
@@ -71,5 +75,24 @@ chainl1 p op = do
 chainParsers :: Parser a -> [Parser (a -> a -> a)] -> Parser a
 chainParsers = foldl chainl1
 
+
+--- Statements ------------------------
+
+exprStmtParser :: Parser Stmt
+exprStmtParser = Eval <$> exprParser
+assignStmtParser :: Parser Stmt
+assignStmtParser =
+    do
+        name <- wordParser
+        whiteSpaceParser
+        _ <- charSatisfy (=='=')
+        whiteSpaceParser
+        Assign name <$> exprParser
+emptyStmtParser :: Parser Stmt
+emptyStmtParser = many1 (spaceParser <|> indentParser) >> return EmptyStmt 
+
+stmtParser :: Parser Stmt
+stmtParser = assignStmtParser <|> exprStmtParser <|> emptyStmtParser
+
 -- Leave this for main to access
-parser = exprParser
+parser = stmtParser
